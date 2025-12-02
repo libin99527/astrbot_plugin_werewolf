@@ -7,7 +7,7 @@
 [![AstrBot](https://img.shields.io/badge/AstrBot-v4.5.0+-blue)](https://github.com/Soulter/AstrBot)
 [![Python](https://img.shields.io/badge/Python-3.8+-green)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-orange)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-v1.0.0-red)](https://github.com/)
+[![Version](https://img.shields.io/badge/Version-v2.0.0-red)](https://github.com/)
 
 </div>
 
@@ -349,6 +349,11 @@ A: 只有投票时间 > 30 秒时才会提醒。如果配置 `timeout_vote` ≤ 
 
 ## 📊 版本历史
 
+### v2.0.0 (2025-12-02)
+- 🔨 **架构重构**：从单文件 main.py 重构为模块化设计，代码结构更清晰
+- 🎴 **接口预留**：预留角色卡片生成接口，便于后续扩展
+- 🐛 修复一些已知问题
+
 ### v1.0.0 (2025-01-12)
 - ✨ 完整的 9 人局游戏流程
 - ✨ AI 复盘功能（可自定义提示词）
@@ -371,7 +376,7 @@ MIT License
 
 **作者**：miao
 **插件 ID**：astrbot_plugin_werewolf
-**版本**：v1.0.0
+**版本**：v2.0.0
 **框架**：AstrBot v4.5.0+
 **语言**：Python 3.8+
 
