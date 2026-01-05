@@ -6,6 +6,7 @@ from astrbot.api import logger
 
 from .base import BaseCommandHandler
 from ..models import GamePhase, Role
+from ..utils import cmd
 
 if TYPE_CHECKING:
     from ..services import GameManager
@@ -39,7 +40,7 @@ class NightCommandHandler(BaseCommandHandler):
         # 获取目标
         target_str = self.get_target_user(event)
         if not target_str:
-            yield event.plain_result("❌ 请指定目标！\n使用：/办掉 编号\n示例：/办掉 1")
+            yield event.plain_result(f"❌ 请指定目标！\n使用：{cmd('办掉')} 编号\n示例：{cmd('办掉')} 1")
             return
 
         target_id = room.parse_target(target_str)
@@ -112,7 +113,7 @@ class NightCommandHandler(BaseCommandHandler):
         # 提取消息内容
         message_text = re.sub(r'^/?\s*(狼人杀\s*)?密谋\s*', '', event.message_str).strip()
         if not message_text:
-            yield event.plain_result("❌ 请输入要发送的消息！\n用法：/密谋 消息内容")
+            yield event.plain_result(f"❌ 请输入要发送的消息！\n用法：{cmd('密谋')} 消息内容")
             return
 
         # 找到其他狼人
@@ -171,7 +172,7 @@ class NightCommandHandler(BaseCommandHandler):
         # 获取目标
         target_str = self.get_target_user(event)
         if not target_str:
-            yield event.plain_result("❌ 请指定验证目标！\n使用：/验人 编号\n示例：/验人 3")
+            yield event.plain_result(f"❌ 请指定验证目标！\n使用：{cmd('验人')} 编号\n示例：{cmd('验人')} 3")
             return
 
         target_id = room.parse_target(target_str)
@@ -276,7 +277,7 @@ class NightCommandHandler(BaseCommandHandler):
         # 获取目标
         target_str = self.get_target_user(event)
         if not target_str:
-            yield event.plain_result("❌ 请指定毒人目标！\n使用：/毒人 编号\n示例：/毒人 5")
+            yield event.plain_result(f"❌ 请指定毒人目标！\n使用：{cmd('毒人')} 编号\n示例：{cmd('毒人')} 5")
             return
 
         target_id = room.parse_target(target_str)
@@ -368,7 +369,7 @@ class NightCommandHandler(BaseCommandHandler):
         # 获取目标
         target_str = self.get_target_user(event)
         if not target_str:
-            yield event.plain_result("❌ 请指定目标！\n使用：/开枪 编号\n示例：/开枪 1")
+            yield event.plain_result(f"❌ 请指定目标！\n使用：{cmd('开枪')} 编号\n示例：{cmd('开枪')} 1")
             return
 
         target_id = room.parse_target(target_str)

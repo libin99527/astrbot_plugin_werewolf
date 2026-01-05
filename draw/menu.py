@@ -24,6 +24,7 @@ from .styles import (
     COLOR_VILLAGER,
 )
 from .gradient_utils import create_vertical_gradient
+from ..utils import get_command_prefix
 
 
 def draw_menu_image(total_players: int = 9) -> Image.Image:
@@ -103,30 +104,33 @@ def draw_menu_image(total_players: int = 9) -> Image.Image:
         return y + rows * (card_h + pad) + 30
 
     # 命令数据 - (命令, 描述, 高亮颜色)
+    # 动态获取命令前缀
+    prefix = get_command_prefix()
+
     basic_cmds = [
-        ("/创建房间", "创建游戏房间", None),
-        ("/加入房间", "加入游戏", None),
-        ("/开始游戏", "开始游戏\n（房主）", None),
-        ("/查角色", "私聊查看\n自己角色", None),
-        ("/游戏状态", "查看当前\n游戏状态", None),
-        ("/结束游戏", "强制结束\n（房主）", None),
+        (f"{prefix}创建房间", "创建游戏房间", None),
+        (f"{prefix}加入房间", "加入游戏", None),
+        (f"{prefix}开始游戏", "开始游戏\n（房主）", None),
+        (f"{prefix}查角色", "私聊查看\n自己角色", None),
+        (f"{prefix}游戏状态", "查看当前\n游戏状态", None),
+        (f"{prefix}结束游戏", "强制结束\n（房主）", None),
     ]
 
     night_cmds = [
-        ("/办掉 编号", "狼人办掉目标", COLOR_WEREWOLF),
-        ("/密谋 消息", "狼人密谋", COLOR_WEREWOLF),
-        ("/验人 编号", "预言家查验", COLOR_SEER),
-        ("/救人", "女巫救人", COLOR_WITCH),
-        ("/毒人 编号", "女巫毒人", COLOR_WITCH),
-        ("/不操作", "女巫跳过", COLOR_WITCH),
-        ("/开枪 编号", "猎人开枪", COLOR_HUNTER),
+        (f"{prefix}办掉 编号", "狼人办掉目标", COLOR_WEREWOLF),
+        (f"{prefix}密谋 消息", "狼人密谋", COLOR_WEREWOLF),
+        (f"{prefix}验人 编号", "预言家查验", COLOR_SEER),
+        (f"{prefix}救人", "女巫救人", COLOR_WITCH),
+        (f"{prefix}毒人 编号", "女巫毒人", COLOR_WITCH),
+        (f"{prefix}不操作", "女巫跳过", COLOR_WITCH),
+        (f"{prefix}开枪 编号", "猎人开枪", COLOR_HUNTER),
     ]
 
     day_cmds = [
-        ("/发言完毕", "结束发言", None),
-        ("/遗言完毕", "结束遗言", None),
-        ("/开始投票", "跳过发言\n（房主）", None),
-        ("/投票 编号", "投票放逐", None),
+        (f"{prefix}发言完毕", "结束发言", None),
+        (f"{prefix}遗言完毕", "结束遗言", None),
+        (f"{prefix}开始投票", "跳过发言\n（房主）", None),
+        (f"{prefix}投票 编号", "投票放逐", None),
     ]
 
     # 计算高度

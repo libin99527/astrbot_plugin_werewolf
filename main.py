@@ -17,15 +17,19 @@ from .handlers import (
     DayCommandHandler,
     QueryCommandHandler,
 )
+from .utils import set_command_prefix
 
 
-@register("astrbot_plugin_werewolf", "miao", "狼人杀游戏（3狼3神3平民+AI复盘+AI玩家）", "v2.3.0")
+@register("astrbot_plugin_werewolf", "miao", "狼人杀游戏（3狼3神3平民+AI复盘+AI玩家）", "v3.0.2")
 class WerewolfPlugin(Star):
     """狼人杀插件"""
 
     def __init__(self, context: Context, config: dict = None, *args, **kwargs):
         super().__init__(context)
         self.context = context
+
+        # 从 AstrBot 配置读取命令前缀
+        self._init_command_prefix()
 
         # 加载配置
         config = config or {}
@@ -42,6 +46,19 @@ class WerewolfPlugin(Star):
 
         # 日志
         self._log_startup()
+
+    def _init_command_prefix(self) -> None:
+        """从 AstrBot 配置读取命令前缀"""
+        try:
+            astrbot_config = self.context.get_config()
+            wake_prefixes = astrbot_config.get("wake_prefix", ["/"])
+            # 使用第一个前缀作为命令前缀
+            prefix = wake_prefixes[0] if wake_prefixes else "/"
+            set_command_prefix(prefix)
+            logger.debug(f"[狼人杀] 命令前缀设置为: {prefix}")
+        except Exception as e:
+            logger.warning(f"[狼人杀] 读取命令前缀失败，使用默认值 '/': {e}")
+            set_command_prefix("/")
 
     def _load_config(self, config: dict) -> GameConfig:
         """加载并验证配置"""

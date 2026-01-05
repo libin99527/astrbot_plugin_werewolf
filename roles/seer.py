@@ -1,6 +1,7 @@
 """预言家角色"""
 from typing import List, TYPE_CHECKING
 from .base import BaseRole
+from ..utils import cmd
 
 if TYPE_CHECKING:
     from ..models import Player, GameRoom, Role
@@ -45,10 +46,10 @@ class SeerRole(BaseRole):
             f"你的目标：{self.goal}！\n\n"
             f"📋 可验证玩家列表：\n{players_list}\n\n"
             f"💡 夜晚私聊使用命令：\n"
-            f"/验人 编号\n"
-            f"示例：/验人 {example_number}\n\n"
+            f"{cmd('验人')} 编号\n"
+            f"示例：{cmd('验人')} {example_number}\n\n"
             f"⚠️ 注意：每晚只能验证一个人！"
         )
 
     def get_night_commands(self) -> List[str]:
-        return ["/验人 编号"]
+        return [f"{cmd('验人')} 编号"]

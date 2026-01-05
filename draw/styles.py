@@ -61,10 +61,10 @@ COLOR_NIGHT = (80, 100, 150)              # 夜晚蓝
 COLOR_DAY = (200, 180, 100)               # 白天金
 
 # --- 字体路径 ---
-# 尝试使用钓鱼插件的字体
+# 插件自带字体（抖音Sans Bold，支持中文）
 FONT_PATH_BOLD = os.path.join(
     os.path.dirname(__file__),
-    "..", "..", "astrbot_plugin_fishing", "draw", "resource", "DouyinSansBold.otf"
+    "resource", "DouyinSansBold.otf"
 )
 
 
@@ -78,9 +78,10 @@ def load_font(size: int) -> ImageFont.FreeTypeFont:
 
     # 尝试系统字体
     system_fonts = [
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        # 中文字体优先（因为菜单是中文）
         "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
         "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
     ]
     for font_path in system_fonts:
         try:

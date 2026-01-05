@@ -4,6 +4,7 @@ from astrbot.api.event import AstrMessageEvent
 
 from .base import BaseCommandHandler
 from ..models import GamePhase
+from ..utils import cmd
 
 if TYPE_CHECKING:
     from ..services import GameManager
@@ -121,7 +122,7 @@ class DayCommandHandler(BaseCommandHandler):
         player_id = event.get_sender_id()
 
         if room.phase != GamePhase.DAY_VOTE:
-            yield event.plain_result("⚠️ 现在不是投票阶段！使用 /开始投票 进入投票")
+            yield event.plain_result(f"⚠️ 现在不是投票阶段！使用 {cmd('开始投票')} 进入投票")
             return
 
         if not room.is_player_in_room(player_id):
@@ -135,7 +136,7 @@ class DayCommandHandler(BaseCommandHandler):
         # 获取目标
         target_str = self.get_target_user(event)
         if not target_str:
-            yield event.plain_result("❌ 请指定投票目标！\n使用：/投票 编号\n示例：/投票 2")
+            yield event.plain_result(f"❌ 请指定投票目标！\n使用：{cmd('投票')} 编号\n示例：{cmd('投票')} 2")
             return
 
         target_id = room.parse_target(target_str)
@@ -202,7 +203,8 @@ class DayCommandHandler(BaseCommandHandler):
         message_text = event.get_message_outline()
 
         # 排除命令
-        if message_text.startswith("/"):
+        from ..utils import get_command_prefix
+        if message_text.startswith(get_command_prefix()):
             return
 
         if not message_text.strip():

@@ -1,6 +1,7 @@
 """狼人角色"""
 from typing import List, TYPE_CHECKING
 from .base import BaseRole
+from ..utils import cmd
 
 if TYPE_CHECKING:
     from ..models import Player, GameRoom, Role
@@ -52,10 +53,10 @@ class WerewolfRole(BaseRole):
             f"你的目标：{self.goal}！{teammate_info}\n\n"
             f"📋 可选目标列表：\n{players_list}\n\n"
             f"💡 夜晚私聊使用命令：\n"
-            f"  /办掉 编号 - 投票办掉目标\n"
-            f"  /密谋 消息 - 与队友交流\n"
-            f"示例：/办掉 1"
+            f"  {cmd('办掉')} 编号 - 投票办掉目标\n"
+            f"  {cmd('密谋')} 消息 - 与队友交流\n"
+            f"示例：{cmd('办掉')} 1"
         )
 
     def get_night_commands(self) -> List[str]:
-        return ["/办掉 编号", "/密谋 消息"]
+        return [f"{cmd('办掉')} 编号", f"{cmd('密谋')} 消息"]
